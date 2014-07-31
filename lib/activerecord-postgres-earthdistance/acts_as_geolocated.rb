@@ -23,6 +23,10 @@ module ActiveRecordPostgresEarthdistance
       def order_by_distance lat, lng, order= "ASC"
         order("earth_distance(ll_to_earth(#{self.latitude_column}, #{self.longitude_column}), ll_to_earth(#{lat}, #{lng})) #{order}")
       end
+      
+      def select_distance lat, lng, name = "distance"
+        select("earth_distance(ll_to_earth(#{self.latitude_column}, #{self.longitude_column}), ll_to_earth(#{lat}, #{lng})) as #{name}")
+      end
 
     end
   end
